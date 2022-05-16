@@ -21,7 +21,7 @@ class Service {
         let requestUrlString = "https://api.unsplash.com/photos/?client_id=" + YOUR_ACCESS_KEY
         
         // Create url object
-        self.url = URL(string: requestUrlString + "/api/exercisekeypoint/GetPatientAssessments")
+        self.url = URL(string: requestUrlString)
 
         guard self.url != nil else {
             // Handle if the url can't be created
@@ -41,7 +41,7 @@ class Service {
 
             // Get configuration for URL Session
             self.sessionConfiguration = URLSessionConfiguration.default
-            self.sessionConfiguration?.timeoutIntervalForResource = 120
+            self.sessionConfiguration?.timeoutIntervalForResource = 30
 
             if #available(iOS 11, *) {
                 self.sessionConfiguration?.waitsForConnectivity = true
@@ -62,7 +62,7 @@ class Service {
 //                    print(httpResponse.statusCode) // TODO: Handle request timeout by using this code
 //                }
 
-                print("Inside dataTask of AssessmentListAPI")
+                print("Inside dataTask of API")
                 // Check if there is any error
                 guard error == nil else {
 //                    print("ERROR: \(error!.localizedDescription)")

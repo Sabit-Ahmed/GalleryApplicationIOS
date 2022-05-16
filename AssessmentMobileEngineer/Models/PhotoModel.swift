@@ -29,7 +29,7 @@ struct PhotoModel: Identifiable, Decodable {
     let user: UrlObject?
 }
 
-struct UrlObject: Decodable {
+struct UrlObject: Identifiable, Decodable {
     var id : UUID?
     let raw: String?
     let full: String?
@@ -39,7 +39,7 @@ struct UrlObject: Decodable {
     let small_s3: String?
 }
 
-struct LinkObject: Decodable {
+struct LinkObject: Identifiable, Decodable {
     let id: UUID?
     let `self`: String?
     let html: String?

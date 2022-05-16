@@ -15,6 +15,8 @@
 		2388C191283277E000DFADAB /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2388C190283277E000DFADAB /* PhotoModel.swift */; };
 		2388C19428327DD700DFADAB /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2388C19328327DD700DFADAB /* Service.swift */; };
 		2388C196283287B100DFADAB /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2388C195283287B100DFADAB /* PhotoViewModel.swift */; };
+		2388C19828329D9000DFADAB /* WebImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2388C19728329D9000DFADAB /* WebImageView.swift */; };
+		2388C19A28329E7500DFADAB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2388C19928329E7500DFADAB /* Extensions.swift */; };
 		D9D446959E94AFF11493BAC4 /* Pods_AssessmentMobileEngineer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0284792E5593846327CC6D4A /* Pods_AssessmentMobileEngineer.framework */; };
 /* End PBXBuildFile section */
 
@@ -29,6 +31,8 @@
 		2388C190283277E000DFADAB /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		2388C19328327DD700DFADAB /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
 		2388C195283287B100DFADAB /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		2388C19728329D9000DFADAB /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
+		2388C19928329E7500DFADAB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BC1A3D1022217C62D3B78242 /* Pods-AssessmentMobileEngineer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssessmentMobileEngineer.release.xcconfig"; path = "Target Support Files/Pods-AssessmentMobileEngineer/Pods-AssessmentMobileEngineer.release.xcconfig"; sourceTree = "<group>"; };
 		E98C54E686866054A58EE0B7 /* Pods-AssessmentMobileEngineer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssessmentMobileEngineer.debug.xcconfig"; path = "Target Support Files/Pods-AssessmentMobileEngineer/Pods-AssessmentMobileEngineer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +94,7 @@
 			isa = PBXGroup;
 			children = (
 				2388C17E28324EDD00DFADAB /* ContentView.swift */,
+				2388C19728329D9000DFADAB /* WebImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -122,6 +127,7 @@
 			isa = PBXGroup;
 			children = (
 				2388C19328327DD700DFADAB /* Service.swift */,
+				2388C19928329E7500DFADAB /* Extensions.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -259,10 +265,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				2388C17F28324EDD00DFADAB /* ContentView.swift in Sources */,
+				2388C19828329D9000DFADAB /* WebImageView.swift in Sources */,
 				2388C19428327DD700DFADAB /* Service.swift in Sources */,
 				2388C17D28324EDD00DFADAB /* AssessmentMobileEngineerApp.swift in Sources */,
 				2388C191283277E000DFADAB /* PhotoModel.swift in Sources */,
 				2388C196283287B100DFADAB /* PhotoViewModel.swift in Sources */,
+				2388C19A28329E7500DFADAB /* Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
