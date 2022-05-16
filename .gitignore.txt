@@ -1,0 +1,6 @@
+# Xcode
+*.pbxuser
+*.xcuserstate
+project.xcworkspace/
+xcuserdata/
+*.xcbkptlist

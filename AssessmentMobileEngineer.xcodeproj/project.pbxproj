@@ -11,14 +11,26 @@
 		2388C17F28324EDD00DFADAB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2388C17E28324EDD00DFADAB /* ContentView.swift */; };
 		2388C18128324EDE00DFADAB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2388C18028324EDE00DFADAB /* Assets.xcassets */; };
 		2388C18428324EDE00DFADAB /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2388C18328324EDE00DFADAB /* Preview Assets.xcassets */; };
+		2388C18F2832570A00DFADAB /* Data.json in Resources */ = {isa = PBXBuildFile; fileRef = 2388C18E2832570A00DFADAB /* Data.json */; };
+		2388C191283277E000DFADAB /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2388C190283277E000DFADAB /* PhotoModel.swift */; };
+		2388C19428327DD700DFADAB /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2388C19328327DD700DFADAB /* Service.swift */; };
+		2388C196283287B100DFADAB /* PhotoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2388C195283287B100DFADAB /* PhotoViewModel.swift */; };
+		D9D446959E94AFF11493BAC4 /* Pods_AssessmentMobileEngineer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0284792E5593846327CC6D4A /* Pods_AssessmentMobileEngineer.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0284792E5593846327CC6D4A /* Pods_AssessmentMobileEngineer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_AssessmentMobileEngineer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2388C17928324EDD00DFADAB /* AssessmentMobileEngineer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AssessmentMobileEngineer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2388C17C28324EDD00DFADAB /* AssessmentMobileEngineerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssessmentMobileEngineerApp.swift; sourceTree = "<group>"; };
 		2388C17E28324EDD00DFADAB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		2388C18028324EDE00DFADAB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2388C18328324EDE00DFADAB /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		2388C18E2832570A00DFADAB /* Data.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = Data.json; sourceTree = "<group>"; };
+		2388C190283277E000DFADAB /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
+		2388C19328327DD700DFADAB /* Service.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		2388C195283287B100DFADAB /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
+		BC1A3D1022217C62D3B78242 /* Pods-AssessmentMobileEngineer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssessmentMobileEngineer.release.xcconfig"; path = "Target Support Files/Pods-AssessmentMobileEngineer/Pods-AssessmentMobileEngineer.release.xcconfig"; sourceTree = "<group>"; };
+		E98C54E686866054A58EE0B7 /* Pods-AssessmentMobileEngineer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssessmentMobileEngineer.debug.xcconfig"; path = "Target Support Files/Pods-AssessmentMobileEngineer/Pods-AssessmentMobileEngineer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +38,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D9D446959E94AFF11493BAC4 /* Pods_AssessmentMobileEngineer.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -37,6 +50,8 @@
 			children = (
 				2388C17B28324EDD00DFADAB /* AssessmentMobileEngineer */,
 				2388C17A28324EDD00DFADAB /* Products */,
+				26581F04149FF4FEC70812D4 /* Pods */,
+				C20E8E1840A0906F2B5581AA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -52,7 +67,11 @@
 			isa = PBXGroup;
 			children = (
 				2388C17C28324EDD00DFADAB /* AssessmentMobileEngineerApp.swift */,
-				2388C17E28324EDD00DFADAB /* ContentView.swift */,
+				2388C18A283255BB00DFADAB /* Views */,
+				2388C18B283255D400DFADAB /* ViewModels */,
+				2388C18C283255E100DFADAB /* Models */,
+				2388C19228327D5000DFADAB /* Utils */,
+				2388C18D283256EA00DFADAB /* Resources */,
 				2388C18028324EDE00DFADAB /* Assets.xcassets */,
 				2388C18228324EDE00DFADAB /* Preview Content */,
 			);
@@ -67,6 +86,63 @@
 			path = "Preview Content";
 			sourceTree = "<group>";
 		};
+		2388C18A283255BB00DFADAB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				2388C17E28324EDD00DFADAB /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		2388C18B283255D400DFADAB /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				2388C195283287B100DFADAB /* PhotoViewModel.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		2388C18C283255E100DFADAB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				2388C190283277E000DFADAB /* PhotoModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		2388C18D283256EA00DFADAB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				2388C18E2832570A00DFADAB /* Data.json */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		2388C19228327D5000DFADAB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2388C19328327DD700DFADAB /* Service.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		26581F04149FF4FEC70812D4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				E98C54E686866054A58EE0B7 /* Pods-AssessmentMobileEngineer.debug.xcconfig */,
+				BC1A3D1022217C62D3B78242 /* Pods-AssessmentMobileEngineer.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		C20E8E1840A0906F2B5581AA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0284792E5593846327CC6D4A /* Pods_AssessmentMobileEngineer.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -74,9 +150,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2388C18728324EDE00DFADAB /* Build configuration list for PBXNativeTarget "AssessmentMobileEngineer" */;
 			buildPhases = (
+				C4F99479F66FBEF421359F04 /* [CP] Check Pods Manifest.lock */,
 				2388C17528324EDD00DFADAB /* Sources */,
 				2388C17628324EDD00DFADAB /* Frameworks */,
 				2388C17728324EDD00DFADAB /* Resources */,
+				18F91E0A462A3DA8D222FADE /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,10 +205,53 @@
 			files = (
 				2388C18428324EDE00DFADAB /* Preview Assets.xcassets in Resources */,
 				2388C18128324EDE00DFADAB /* Assets.xcassets in Resources */,
+				2388C18F2832570A00DFADAB /* Data.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		18F91E0A462A3DA8D222FADE /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AssessmentMobileEngineer/Pods-AssessmentMobileEngineer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AssessmentMobileEngineer/Pods-AssessmentMobileEngineer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AssessmentMobileEngineer/Pods-AssessmentMobileEngineer-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		C4F99479F66FBEF421359F04 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-AssessmentMobileEngineer-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2388C17528324EDD00DFADAB /* Sources */ = {
@@ -138,7 +259,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				2388C17F28324EDD00DFADAB /* ContentView.swift in Sources */,
+				2388C19428327DD700DFADAB /* Service.swift in Sources */,
 				2388C17D28324EDD00DFADAB /* AssessmentMobileEngineerApp.swift in Sources */,
+				2388C191283277E000DFADAB /* PhotoModel.swift in Sources */,
+				2388C196283287B100DFADAB /* PhotoViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -261,6 +385,7 @@
 		};
 		2388C18828324EDE00DFADAB /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E98C54E686866054A58EE0B7 /* Pods-AssessmentMobileEngineer.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -290,6 +415,7 @@
 		};
 		2388C18928324EDE00DFADAB /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = BC1A3D1022217C62D3B78242 /* Pods-AssessmentMobileEngineer.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
