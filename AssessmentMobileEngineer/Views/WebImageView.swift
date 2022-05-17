@@ -11,8 +11,6 @@ import SDWebImageSwiftUI
 struct WebImageView: View {
     
     var url: URL
-    var width: CGFloat = 100
-    var height: CGFloat = 100
     
     var body: some View {
         
@@ -28,7 +26,7 @@ struct WebImageView: View {
 //                LocalAnimatedImageView()
             })
             .resizable()
-            .frame(width: self.width, height: self.height, alignment: .center)
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 100)
             .cornerRadius(3)
             .transition(.fade)
         
