@@ -10,10 +10,12 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var photoModel: PhotoViewModel
+    var gridItemLayout: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
-        ScrollView {
-            LazyVStack {
+        
+        ScrollView(.vertical) {
+            LazyVGrid(columns: gridItemLayout) {
                 if photoModel.showPhotoList {
                     ForEach(photoModel.listOfPhotoModels ?? []) { photo in
                         WebImageView(url: (photo.urls?.regular?.encodedUrl())!)
@@ -26,6 +28,7 @@ struct ContentView: View {
                 }
             }
         }
+        .padding()
         .onAppear {
             photoModel.getPhotos()
         }

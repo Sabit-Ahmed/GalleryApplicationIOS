@@ -12,7 +12,7 @@ struct WebImageView: View {
     
     var url: URL
     var width: CGFloat = 100
-    var height: CGFloat = 170
+    var height: CGFloat = 100
     
     var body: some View {
         
@@ -29,7 +29,7 @@ struct WebImageView: View {
             })
             .resizable()
             .frame(width: self.width, height: self.height, alignment: .center)
-            .cornerRadius(2)
+            .cornerRadius(3)
             .transition(.fade)
         
     }
