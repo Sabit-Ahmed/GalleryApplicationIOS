@@ -20,13 +20,13 @@ struct PhotoModel: Identifiable, Decodable {
     let alt_description: String?
     let urls: UrlObject?
     let links: LinkObject?
-    let categories: [UrlObject]?
+    var categories: [String]?
     let likes: Int?
     let liked_by_user: Bool?
-    let current_user_collections: [UrlObject]?
-    let sponsorship: UrlObject?
-    let topic_submissions: UrlObject?
-    let user: UrlObject?
+    let current_user_collections: [String]?
+    let sponsorship: SponsorshipObject?
+    let topic_submissions: TopicSubmissionsObject?
+    let user: SponsorObject?
 }
 
 struct UrlObject: Identifiable, Decodable {
@@ -45,4 +45,64 @@ struct LinkObject: Identifiable, Decodable {
     let html: String?
     let download: String?
     let download_location: String?
+}
+
+struct SponsorshipObject: Identifiable, Decodable {
+    let id: UUID?
+    let impression_urls: [String]?
+    let tagline: String?
+    let tagline_url: String?
+    let sponsor: SponsorObject?
+}
+
+struct SponsorObject: Identifiable, Decodable {
+    let id: String?
+    let updated_at: String?
+    let username: String?
+    let name: String?
+    let first_name: String?
+    let last_name: String?
+    let twitter_username: String?
+    let portfolio_url: String?
+    let bio: String?
+    let location: String?
+    let links: SponsorLinkObject?
+    let profile_image: ProfileImageObject?
+    let instagram_username: String?
+    let total_collections: Int?
+    let total_likes: Int?
+    let total_photos: Int?
+    let accepted_tos: Bool?
+    let for_hire: Bool?
+    let social: SocialObject?
+}
+
+struct SponsorLinkObject: Identifiable, Decodable {
+    let id: UUID?
+    let `self`: String?
+    let html: String?
+    let photos: String
+    let likes: String
+    let portfolio: String
+    let following: String
+    let followers: String
+}
+
+struct ProfileImageObject: Identifiable, Decodable {
+    let id: UUID?
+    let small: String?
+    let medium: String?
+    let large: String?
+}
+
+struct SocialObject: Identifiable, Decodable {
+    let id: UUID?
+    let instagram_username: String?
+    let portfolio_url: String?
+    let twitter_username: String?
+    let paypal_email: String?
+}
+
+struct TopicSubmissionsObject: Identifiable, Decodable {
+    let id: UUID?
 }
