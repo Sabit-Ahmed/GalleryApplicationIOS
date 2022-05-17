@@ -26,7 +26,7 @@ class Service {
     func getPhotosFromRemote(completion: @escaping (([PhotoModel]?, Error?) -> Void)) {
         
         let ACCESS_KEY = "gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8"
-        let requestUrlString = "https://api.unsplash.com/photos/?client_id=\(ACCESS_KEY)"
+        let requestUrlString = "https://api.unsplash.com/photos/?client_id=\(ACCESS_KEY)&per_page=12"
         
         // Create url object
         self.url = URL(string: requestUrlString)
