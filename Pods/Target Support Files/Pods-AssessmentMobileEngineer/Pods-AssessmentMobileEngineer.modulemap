@@ -1,0 +1,6 @@
+framework module Pods_AssessmentMobileEngineer {
+  umbrella header "Pods-AssessmentMobileEngineer-umbrella.h"
+
+  export *
+  module * { export * }
+}
