@@ -13,11 +13,16 @@ struct ContentView: View {
     
     var body: some View {
         ScrollView {
-            LazyHStack {
+            LazyVStack {
                 if photoModel.showPhotoList {
                     ForEach(photoModel.listOfPhotoModels ?? []) { photo in
                         WebImageView(url: (photo.urls?.regular?.encodedUrl())!)
                     }
+                }
+                else {
+                    ProgressView()
+                        .progressViewStyle(.circular)
+                        .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
                 }
             }
         }

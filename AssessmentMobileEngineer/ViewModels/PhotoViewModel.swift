@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class PhotoViewModel: ObservableObject {
     
@@ -27,7 +28,12 @@ class PhotoViewModel: ObservableObject {
 
             if listOfPhotos != nil {
                 self.listOfPhotoModels = listOfPhotos
-                self.showPhotoList = true
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500)) {
+                    withAnimation {
+                        self.showPhotoList = true
+                    }
+                }
+                
             }
         })
         
