@@ -14,21 +14,28 @@ struct ContentView: View {
     
     var body: some View {
         
-        ScrollView(.vertical) {
-            LazyVGrid(columns: gridItemLayout) {
-                if photoModel.showPhotoList {
-                    ForEach(photoModel.listOfPhotoModels ?? []) { photo in
-                        WebImageView(url: (photo.urls?.regular?.encodedUrl())!)
+        NavigationView {
+            
+            if photoModel.showPhotoList {
+                ScrollView(.vertical) {
+                    LazyVGrid(columns: gridItemLayout) {
+                        
+                        ForEach(photoModel.listOfPhotoModels ?? []) { photo in
+                            WebImageView(url: (photo.urls?.regular?.encodedUrl())!)
+                        }
+                        
                     }
                 }
-                else {
-                    ProgressView()
-                        .progressViewStyle(.circular)
-                        .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 2)
-                }
+                .padding(5)
+                .navigationTitle("Photo Gallery")
+                
+            }
+            else {
+                ProgressView()
+                    .progressViewStyle(.circular)
+                    .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 3)
             }
         }
-        .padding()
         .onAppear {
             photoModel.getPhotos()
         }

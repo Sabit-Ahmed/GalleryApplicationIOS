@@ -26,8 +26,8 @@ struct WebImageView: View {
 //                LocalAnimatedImageView()
             })
             .resizable()
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50, maxHeight: 100)
-            .cornerRadius(3)
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 150)
+            .cornerRadius(5)
             .transition(.fade)
         
     }
