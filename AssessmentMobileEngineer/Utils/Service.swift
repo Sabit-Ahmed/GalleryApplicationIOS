@@ -15,10 +15,18 @@ class Service {
     var session: URLSession?
     var dataTask: URLSessionDataTask?
     
+//    func getLink(linkType: String) -> String {
+//        switch linkType.lowercased() {
+//        case "next": return "https://api.unsplash.com/photos?client_id=gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8&page=2"
+//        case "last": return "https://api.unsplash.com/photos?client_id=gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8&page=26318"
+//        default: return "https://api.unsplash.com/photos/?client_id=gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8"
+//        }
+//    }
+    
     func getPhotosFromRemote(completion: @escaping (([PhotoModel]?, Error?) -> Void)) {
         
-        let YOUR_ACCESS_KEY = "gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8"
-        let requestUrlString = "https://api.unsplash.com/photos/?client_id=" + YOUR_ACCESS_KEY
+        let ACCESS_KEY = "gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8"
+        let requestUrlString = "https://api.unsplash.com/photos/?client_id=\(ACCESS_KEY)"
         
         // Create url object
         self.url = URL(string: requestUrlString)
@@ -58,9 +66,9 @@ class Service {
             self.dataTask = self.session?.dataTask(with: self.request!) { data, response, error in
 
 
-//                if let httpResponse = response as? HTTPURLResponse {
-//                    print(httpResponse.statusCode) // TODO: Handle request timeout by using this code
-//                }
+                if let httpResponse = response as? HTTPURLResponse {
+                    print(httpResponse.allHeaderFields["Link"]) // TODO: Handle request timeout by using this code
+                }
 
                 print("Inside dataTask of API")
                 // Check if there is any error
