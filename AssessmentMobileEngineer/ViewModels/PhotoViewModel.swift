@@ -10,11 +10,14 @@ import Foundation
 class PhotoViewModel: ObservableObject {
     
     @Published var service: Service?
+    @Published var listOfPhotoModels: [PhotoModel]?
+    @Published var showPhotoList: Bool = false
     
     func getPhotos() {
-        
-        self.service?.getPhotosFromRemote() { response, error in
-
+        print("outside")
+        self.service = Service()
+        self.service?.getPhotosFromRemote(completion: { listOfPhotos, error in
+            print("inside")
             if error != nil {
 
                 print("ERROR: \(String(describing: error?.localizedDescription))")
@@ -22,12 +25,11 @@ class PhotoViewModel: ObservableObject {
 
             }
 
-            if response != nil {
-                //
+            if listOfPhotos != nil {
+                self.listOfPhotoModels = listOfPhotos
+                self.showPhotoList = true
             }
-
-
-        }
+        })
         
     }
 }
