@@ -11,6 +11,7 @@ class PhotoViewModel: ObservableObject {
     
     @Published var service: Service?
     @Published var listOfPhotoModels: [PhotoModel]?
+    @Published var showPhotoList: Bool = false
     
     func getPhotos() {
         print("outside")
@@ -26,6 +27,7 @@ class PhotoViewModel: ObservableObject {
 
             if listOfPhotos != nil {
                 self.listOfPhotoModels = listOfPhotos
+                self.showPhotoList = true
             }
         })
         
