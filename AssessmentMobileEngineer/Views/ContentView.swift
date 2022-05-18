@@ -10,6 +10,7 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var photoModel: PhotoViewModel
+    @State var midY: Double = 0
     var gridItemLayout: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -18,14 +19,26 @@ struct ContentView: View {
             
             if photoModel.showPhotoList {
                 ScrollView(.vertical) {
-                    LazyVGrid(columns: gridItemLayout) {
-                        
-                        ForEach(photoModel.listOfPhotoModels ?? []) { photo in
-                            WebImageView(url: (photo.urls?.regular?.encodedUrl())!)
+                    ZStack {
+                        LazyVGrid(columns: gridItemLayout) {
+                            
+                            ForEach(photoModel.listOfPhotoModels ?? []) { photo in
+                                WebImageView(url: (photo.urls?.regular?.encodedUrl())!)
+                            }
+                            
                         }
                         
                     }
                 }
+                .simultaneousGesture(
+                    DragGesture().onChanged({
+                        let isScrollDown = 0 < $0.translation.height
+                        print(isScrollDown)
+                        if !isScrollDown {
+                            photoModel.getPhotos()
+                        }
+                    })
+                )
                 .padding(5)
                 .navigationTitle("Photo Gallery")
                 

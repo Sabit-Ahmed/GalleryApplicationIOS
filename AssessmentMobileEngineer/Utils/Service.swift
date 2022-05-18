@@ -15,19 +15,21 @@ class Service {
     var session: URLSession?
     var dataTask: URLSessionDataTask?
     
-//    func getLink(linkType: String) -> String {
-//        switch linkType.lowercased() {
-//        case "next": return "https://api.unsplash.com/photos?client_id=gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8&page=2"
-//        case "last": return "https://api.unsplash.com/photos?client_id=gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8&page=26318"
-//        default: return "https://api.unsplash.com/photos/?client_id=gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8"
-//        }
-//    }
+    func getLink(linkType: String) -> String {
+        
+        let ACCESS_KEY = "gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8"
+        
+        switch linkType.lowercased() {
+        case "next": return "https://api.unsplash.com/photos/?client_id=\(ACCESS_KEY)&per_page=12&page=2"
+        case "last": return "https://api.unsplash.com/photos/?client_id=\(ACCESS_KEY)&per_page=12&page=26318"
+        default: return "https://api.unsplash.com/photos/random/?client_id=\(ACCESS_KEY)&count=15"
+        }
+    }
     
     func getPhotosFromRemote(completion: @escaping (([PhotoModel]?, Error?) -> Void)) {
         
-        let ACCESS_KEY = "gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8"
-        let requestUrlString = "https://api.unsplash.com/photos/?client_id=\(ACCESS_KEY)&per_page=12"
-        
+        let requestUrlString = getLink(linkType: "rand")
+
         // Create url object
         self.url = URL(string: requestUrlString)
 
