@@ -51,7 +51,7 @@ struct ContentView: View {
                         let isScrollDown = 0 < $0.translation.height
                         print(isScrollDown)
                         if !isScrollDown && isLastItem {
-                            photoModel.getPhotos(linkType: "more")
+                            photoModel.getPhotos(linkType: "default")
                         }
                     })
                 )
