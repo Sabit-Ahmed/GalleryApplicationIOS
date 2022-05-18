@@ -11,6 +11,7 @@ struct ContentView: View {
     
     @EnvironmentObject var photoModel: PhotoViewModel
     @State var midY: Double = 0
+    @State var isLastItem: Bool = false
     var gridItemLayout: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -22,8 +23,18 @@ struct ContentView: View {
                     ZStack {
                         LazyVGrid(columns: gridItemLayout) {
                             
-                            ForEach(0..<photoModel.listOfPhotoModels.count, id: \.self) { photo in
-                                WebImageView(url: (photoModel.listOfPhotoModels[photo].urls?.regular?.encodedUrl())!)
+                            ForEach(0..<photoModel.listOfPhotoModels.count, id: \.self) { item in
+                                WebImageView(url: (photoModel.listOfPhotoModels[item].urls?.regular?.encodedUrl())!)
+                                    .onAppear {
+                                        if item == photoModel.listOfPhotoModels.count - 1 {
+                                            isLastItem = true
+                                        }
+                                    }
+                                    .onDisappear {
+                                        if item == photoModel.listOfPhotoModels.count - 1 {
+                                            isLastItem = false
+                                        }
+                                    }
                             }
                             
                         }
@@ -34,8 +45,8 @@ struct ContentView: View {
                     DragGesture().onChanged({
                         let isScrollDown = 0 < $0.translation.height
                         print(isScrollDown)
-                        if !isScrollDown {
-                            photoModel.getPhotos()
+                        if !isScrollDown && isLastItem {
+                            photoModel.getPhotos(linkType: "more")
                         }
                     })
                 )
@@ -50,7 +61,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            photoModel.getPhotos()
+            photoModel.getPhotos(linkType: "default")
         }
     }
 }

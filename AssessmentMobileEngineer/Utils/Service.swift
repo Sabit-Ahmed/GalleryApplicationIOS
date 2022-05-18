@@ -22,13 +22,14 @@ class Service {
         switch linkType.lowercased() {
         case "next": return "https://api.unsplash.com/photos/?client_id=\(ACCESS_KEY)&per_page=12&page=2"
         case "last": return "https://api.unsplash.com/photos/?client_id=\(ACCESS_KEY)&per_page=12&page=26318"
+        case "more": return "https://api.unsplash.com/photos/random/?client_id=\(ACCESS_KEY)&count=3"
         default: return "https://api.unsplash.com/photos/random/?client_id=\(ACCESS_KEY)&count=15"
         }
     }
     
-    func getPhotosFromRemote(completion: @escaping (([PhotoModel]?, Error?) -> Void)) {
+    func getPhotosFromRemote(linkType: String, completion: @escaping (([PhotoModel]?, Error?) -> Void)) {
         
-        let requestUrlString = getLink(linkType: "rand")
+        let requestUrlString = getLink(linkType: linkType)
 
         // Create url object
         self.url = URL(string: requestUrlString)

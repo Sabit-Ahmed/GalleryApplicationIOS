@@ -14,10 +14,10 @@ class PhotoViewModel: ObservableObject {
     @Published var listOfPhotoModels = [PhotoModel]()
     @Published var showPhotoList: Bool = false
     
-    func getPhotos() {
+    func getPhotos(linkType: String) {
         
         self.service = Service()
-        self.service?.getPhotosFromRemote(completion: { listOfPhotos, error in
+        self.service?.getPhotosFromRemote(linkType: linkType, completion: { listOfPhotos, error in
             print("inside")
             if error != nil {
 
