@@ -24,17 +24,22 @@ struct ContentView: View {
                         LazyVGrid(columns: gridItemLayout) {
                             
                             ForEach(0..<photoModel.listOfPhotoModels.count, id: \.self) { item in
-                                WebImageView(url: (photoModel.listOfPhotoModels[item].urls?.regular?.encodedUrl())!)
-                                    .onAppear {
-                                        if item == photoModel.listOfPhotoModels.count - 1 {
-                                            isLastItem = true
+                                NavigationLink {
+                                    DetailView(url: (photoModel.listOfPhotoModels[item].urls?.regular?.encodedUrl())!)
+                                } label: {
+                                    WebImageView(url: (photoModel.listOfPhotoModels[item].urls?.regular?.encodedUrl())!, maxHeight: 150)
+                                        .onAppear {
+                                            if item == photoModel.listOfPhotoModels.count - 1 {
+                                                isLastItem = true
+                                            }
                                         }
-                                    }
-                                    .onDisappear {
-                                        if item == photoModel.listOfPhotoModels.count - 1 {
-                                            isLastItem = false
+                                        .onDisappear {
+                                            if item == photoModel.listOfPhotoModels.count - 1 {
+                                                isLastItem = false
+                                            }
                                         }
-                                    }
+                                }
+
                             }
                             
                         }
