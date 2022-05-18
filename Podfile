@@ -6,6 +6,5 @@ target 'AssessmentMobileEngineer' do
   use_frameworks!
 
   # Pods for AssessmentMobileEngineer
-  pod 'UnsplashPhotoPicker', '~> 1.3'
   pod 'SDWebImageSwiftUI'
 end
