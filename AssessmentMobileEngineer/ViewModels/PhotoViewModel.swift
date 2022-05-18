@@ -11,11 +11,11 @@ import SwiftUI
 class PhotoViewModel: ObservableObject {
     
     @Published var service: Service?
-    @Published var listOfPhotoModels: [PhotoModel]?
+    @Published var listOfPhotoModels = [PhotoModel]()
     @Published var showPhotoList: Bool = false
     
     func getPhotos() {
-        print("outside")
+        
         self.service = Service()
         self.service?.getPhotosFromRemote(completion: { listOfPhotos, error in
             print("inside")
@@ -27,7 +27,11 @@ class PhotoViewModel: ObservableObject {
             }
 
             if listOfPhotos != nil {
-                self.listOfPhotoModels = listOfPhotos
+                
+                for item in listOfPhotos! {
+                    self.listOfPhotoModels.append(item)
+                }
+                
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500)) {
                     withAnimation {
                         self.showPhotoList = true

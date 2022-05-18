@@ -22,7 +22,7 @@ struct ContentView: View {
                     ZStack {
                         LazyVGrid(columns: gridItemLayout) {
                             
-                            ForEach(photoModel.listOfPhotoModels ?? []) { photo in
+                            ForEach(photoModel.listOfPhotoModels) { photo in
                                 WebImageView(url: (photo.urls?.regular?.encodedUrl())!)
                             }
                             

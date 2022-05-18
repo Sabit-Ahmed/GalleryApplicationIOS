@@ -68,9 +68,9 @@ class Service {
             self.dataTask = self.session?.dataTask(with: self.request!) { data, response, error in
 
 
-                if let httpResponse = response as? HTTPURLResponse {
-                    print(httpResponse.allHeaderFields["Link"]) // TODO: Handle request timeout by using this code
-                }
+//                if let httpResponse = response as? HTTPURLResponse {
+//                    print(httpResponse.statusCode) // TODO: Handle request timeout by using this code
+//                }
 
                 print("Inside dataTask of API")
                 // Check if there is any error
@@ -117,10 +117,6 @@ class Service {
             // Kick off the task
             self.dataTask?.resume()
 
-        }
-        catch {
-            print("Can't encode json resquest body")
-            completion(nil, error) // when you have error
         }
     }
     
