@@ -28,7 +28,7 @@ Note:
 
 1. Grid LayOut (LazyVGrid or LazyHGrid):
 
-https://www.appcoda.com/learnswiftui/swiftui-gridlayout.html
+* https://www.appcoda.com/learnswiftui/swiftui-gridlayout.html
 
 2. Saving a SwiftUI view to Photo Library: 
 
