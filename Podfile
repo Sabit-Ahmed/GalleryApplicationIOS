@@ -6,5 +6,4 @@ target 'AssessmentMobileEngineer' do
   use_frameworks!
 
   # Pods for AssessmentMobileEngineer
-  pod 'SDWebImageSwiftUI'
 end
