@@ -73,7 +73,6 @@
 		2388C17B28324EDD00DFADAB /* AssessmentMobileEngineer */ = {
 			isa = PBXGroup;
 			children = (
-				23ED0687283638F30029D5F5 /* Info.plist */,
 				2388C17C28324EDD00DFADAB /* AssessmentMobileEngineerApp.swift */,
 				2388C18A283255BB00DFADAB /* Views */,
 				2388C18B283255D400DFADAB /* ViewModels */,
@@ -81,6 +80,7 @@
 				2388C19228327D5000DFADAB /* Utils */,
 				2388C18D283256EA00DFADAB /* Resources */,
 				2388C18028324EDE00DFADAB /* Assets.xcassets */,
+				23ED0687283638F30029D5F5 /* Info.plist */,
 				2388C18228324EDE00DFADAB /* Preview Content */,
 			);
 			path = AssessmentMobileEngineer;
