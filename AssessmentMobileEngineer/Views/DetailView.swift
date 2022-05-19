@@ -11,13 +11,24 @@ struct DetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
     var url: URL
+    @State private var image: Image?
+    
     var body: some View {
         
         ZStack {
             RoundedRectangle(cornerRadius: 2)
                 .foregroundColor(.black)
             
-            WebImageView(url: url, maxHeight: 250)
+            AsyncImage(url: self.url) { image in
+                image.resizable()
+                    .onAppear {
+                        self.image = image
+                    }
+            } placeholder: {
+                ProgressView()
+            }
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 250)
+            .cornerRadius(5)
                 
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -63,7 +74,7 @@ struct DetailView: View {
     }
     
     func savePhoto() {
-        let image = DetailView(url: url).snapshot()
+        let image = self.image.snapshot()
         
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
