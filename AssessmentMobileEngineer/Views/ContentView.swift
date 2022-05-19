@@ -10,8 +10,10 @@ import SwiftUI
 struct ContentView: View {
     
     @EnvironmentObject var photoModel: PhotoViewModel
-    @State var midY: Double = 0
-    @State var isLastItem: Bool = false
+    @State private var midY: Double = 0
+    @State private var isLastItem: Bool = false
+    @State private var isImageTapped: Bool = false
+    @State private var image: UIImage = UIImage()
     var gridItemLayout: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -24,10 +26,23 @@ struct ContentView: View {
                         LazyVGrid(columns: gridItemLayout) {
                             
                             ForEach(0..<photoModel.listOfPhotoModels.count, id: \.self) { item in
-                                NavigationLink {
-                                    DetailView(url: (photoModel.listOfPhotoModels[item].urls?.regular?.encodedUrl())!)
-                                } label: {
-                                    WebImageView(url: (photoModel.listOfPhotoModels[item].urls?.regular?.encodedUrl())!, maxHeight: 150)
+                                NavigationLink (
+                                destination: AlternativeDetailView(uiImage: $image),
+                                isActive: $isImageTapped,
+                                label: {
+                                    AsyncImage(url: (photoModel.listOfPhotoModels[item].urls?.regular?.encodedUrl())!) { image in
+                                        image.resizable()
+                                            .onTapGesture {
+                                                DispatchQueue.main.async {
+                                                    isImageTapped = true
+                                                    self.image = image.snapshot()
+                                                }
+                                            }
+                                    } placeholder: {
+                                        ProgressView()
+                                    }
+                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 150)
+                                    .cornerRadius(5)
                                         .onAppear {
                                             if item == photoModel.listOfPhotoModels.count - 1 {
                                                 isLastItem = true
@@ -38,7 +53,7 @@ struct ContentView: View {
                                                 isLastItem = false
                                             }
                                         }
-                                }
+                                })
 
                             }
                             
