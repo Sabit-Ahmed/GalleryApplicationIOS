@@ -9,6 +9,7 @@ import SwiftUI
 
 struct DetailView: View {
     
+    @Environment(\.presentationMode) var presentationMode
     var url: URL
     var body: some View {
         
@@ -19,7 +20,50 @@ struct DetailView: View {
             WebImageView(url: url, maxHeight: 250)
                 
         }
+        .navigationBarTitleDisplayMode(.inline)
+        .navigationBarBackButtonHidden(true) // hides the "back" or previous view title button
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button {
+                    DispatchQueue.main.async {
+                        resetAllViewProperties()
+                    }
+                    
+                } label: {
+                    HStack {
+                        Image(systemName: "chevron.backward")
+                        
+                        Text("Back")
+                    }
+                }
+            }
+            
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                Button {
+                    DispatchQueue.main.async {
+                        savePhoto()
+                    }
+                    
+                } label: {
+                    HStack {
+                        Image(systemName: "checkmark")
+                            .foregroundColor(.blue)
+                        
+                        Text("Save")
+                    }
+                }
+            }
+        }
         
+    }
+    
+    func resetAllViewProperties() {
+        presentationMode.wrappedValue.dismiss()
+    }
+    
+    func savePhoto() {
+        //
     }
 }
 

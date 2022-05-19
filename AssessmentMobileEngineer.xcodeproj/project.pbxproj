@@ -35,6 +35,7 @@
 		2388C195283287B100DFADAB /* PhotoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoViewModel.swift; sourceTree = "<group>"; };
 		2388C19728329D9000DFADAB /* WebImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageView.swift; sourceTree = "<group>"; };
 		2388C19928329E7500DFADAB /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		23ED0687283638F30029D5F5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		BC1A3D1022217C62D3B78242 /* Pods-AssessmentMobileEngineer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssessmentMobileEngineer.release.xcconfig"; path = "Target Support Files/Pods-AssessmentMobileEngineer/Pods-AssessmentMobileEngineer.release.xcconfig"; sourceTree = "<group>"; };
 		E98C54E686866054A58EE0B7 /* Pods-AssessmentMobileEngineer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-AssessmentMobileEngineer.debug.xcconfig"; path = "Target Support Files/Pods-AssessmentMobileEngineer/Pods-AssessmentMobileEngineer.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +73,7 @@
 		2388C17B28324EDD00DFADAB /* AssessmentMobileEngineer */ = {
 			isa = PBXGroup;
 			children = (
+				23ED0687283638F30029D5F5 /* Info.plist */,
 				2388C17C28324EDD00DFADAB /* AssessmentMobileEngineerApp.swift */,
 				2388C18A283255BB00DFADAB /* Views */,
 				2388C18B283255D400DFADAB /* ViewModels */,
@@ -407,6 +409,8 @@
 				DEVELOPMENT_TEAM = R276PCR378;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AssessmentMobileEngineer/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -437,6 +441,8 @@
 				DEVELOPMENT_TEAM = R276PCR378;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AssessmentMobileEngineer/Info.plist;
+				INFOPLIST_KEY_NSPhotoLibraryAddUsageDescription = "";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
