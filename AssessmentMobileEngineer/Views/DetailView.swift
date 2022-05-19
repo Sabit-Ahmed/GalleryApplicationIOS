@@ -63,7 +63,9 @@ struct DetailView: View {
     }
     
     func savePhoto() {
-        //
+        let image = DetailView(url: url).snapshot()
+        
+        UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
     }
 }
 

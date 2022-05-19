@@ -11,6 +11,7 @@ struct WebImageView: View {
     
     var url: URL
     var maxHeight: CGFloat
+    
     var body: some View {
         
         AsyncImage(url: self.url) { image in
@@ -20,7 +21,6 @@ struct WebImageView: View {
         }
         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: maxHeight)
         .cornerRadius(5)
-        
         
     }
 }

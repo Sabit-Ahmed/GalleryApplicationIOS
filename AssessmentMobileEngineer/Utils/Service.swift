@@ -95,8 +95,6 @@ class Service {
                     let modules = try jsonDecoder.decode([PhotoModel].self, from: data!)
                     
                     DispatchQueue.main.async {
-                        self.session?.invalidateAndCancel()
-
                         completion(modules, nil) // when you have user
                     }
 
