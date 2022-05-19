@@ -45,12 +45,14 @@ struct DetailView: View {
                     } placeholder: {
                         ProgressView()
                     }
-                    .frame(minWidth: 0, maxWidth: UIScreen.main.bounds.width - 10, minHeight: 0, maxHeight: 250)
+                    .frame(minWidth: 0, maxWidth: UIScreen.main.bounds.width, minHeight: 0, maxHeight: 350)
                 .cornerRadius(5)
                 }
                 
                 ToastView()
             }
+            .padding(.vertical, 10)
+            .padding(.horizontal, 0)
                 
         }
         .navigationBarTitleDisplayMode(.inline)
