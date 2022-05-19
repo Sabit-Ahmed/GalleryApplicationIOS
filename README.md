@@ -26,7 +26,8 @@ Note:
 
 ### Important links followed step by step in this project:
 
-1. Grid LayOut (LazyVGrid or LazyHGrid): https://www.appcoda.com/learnswiftui/swiftui-gridlayout.html
+1. Grid LayOut (LazyVGrid or LazyHGrid):
+https://www.appcoda.com/learnswiftui/swiftui-gridlayout.html
 
 2. Saving a SwiftUI view to Photo Library: https://swdevnotes.com/swift/2022/saving-a-swiftui-view-to-photos/
     https://www.hackingwithswift.com/quick-start/swiftui/how-to-convert-a-swiftui-view-to-an-image
