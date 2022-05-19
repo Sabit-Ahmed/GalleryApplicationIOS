@@ -12,6 +12,7 @@ struct DetailView: View {
     @Environment(\.presentationMode) var presentationMode
     var url: URL
     @State private var image: Image?
+    @State private var isToastShown: Bool = false
     
     var body: some View {
         
@@ -19,16 +20,20 @@ struct DetailView: View {
             RoundedRectangle(cornerRadius: 2)
                 .foregroundColor(.black)
             
-            AsyncImage(url: self.url) { image in
-                image.resizable()
-                    .onAppear {
-                        self.image = image
-                    }
-            } placeholder: {
-                ProgressView()
+            VStack {
+                AsyncImage(url: self.url) { image in
+                    image.resizable()
+                        .onAppear {
+                            self.image = image
+                        }
+                } placeholder: {
+                    ProgressView()
+                }
+                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 250)
+                .cornerRadius(5)
+                
+                ToastView()
             }
-            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 250)
-            .cornerRadius(5)
                 
         }
         .navigationBarTitleDisplayMode(.inline)
@@ -78,14 +83,36 @@ struct DetailView: View {
         }
     }
     
+    @ViewBuilder
+    func ToastView() -> some View {
+        Text("Successfully saved to photo gallery")
+            .padding()
+            .background(.white)
+            .foregroundColor(.black)
+            .clipShape(Capsule())
+            .opacity(isToastShown ? 1 : 0)
+
+    }
+    
+    func showToastView() {
+        withAnimation(.easeIn(duration: 1)) {
+            isToastShown = true
+        }
+        DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(3000)) {
+            withAnimation(.easeOut(duration: 1)) {
+                isToastShown = false
+            }
+        }
+    }
+    
     func resetAllViewProperties() {
         presentationMode.wrappedValue.dismiss()
     }
     
     func savePhoto() {
         let image = self.image.snapshot()
-        
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
+        showToastView()
     }
 }
 
