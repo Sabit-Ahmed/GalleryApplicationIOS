@@ -44,13 +44,17 @@ struct ContentView: View {
                                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 150)
                                     .cornerRadius(5)
                                         .onAppear {
-                                            if item == photoModel.listOfPhotoModels.count - 1 {
-                                                isLastItem = true
+                                            DispatchQueue.main.async {
+                                                if item == photoModel.listOfPhotoModels.count - 1 {
+                                                    isLastItem = true
+                                                }
                                             }
                                         }
                                         .onDisappear {
-                                            if item == photoModel.listOfPhotoModels.count - 1 {
-                                                isLastItem = false
+                                            DispatchQueue.main.async {
+                                                if item == photoModel.listOfPhotoModels.count - 1 {
+                                                    isLastItem = false
+                                                }
                                             }
                                         }
                                 })
