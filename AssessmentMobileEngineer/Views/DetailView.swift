@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct AlternativeDetailView: View {
+struct DetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
     @Binding var uiImage: UIImage
@@ -112,7 +112,7 @@ struct AlternativeDetailView: View {
 
 struct AlternativeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        AlternativeDetailView(uiImage: .constant(UIImage(systemName: "checkmark")!))
+        DetailView(uiImage: .constant(UIImage(systemName: "checkmark")!))
             .environmentObject(PhotoViewModel())
     }
 }

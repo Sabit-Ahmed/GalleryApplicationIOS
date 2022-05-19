@@ -27,7 +27,7 @@ struct ContentView: View {
                             
                             ForEach(0..<photoModel.listOfPhotoModels.count, id: \.self) { item in
                                 NavigationLink (
-                                destination: AlternativeDetailView(uiImage: $image),
+                                destination: DetailView(uiImage: $image),
                                 isActive: $isImageTapped,
                                 label: {
                                     AsyncImage(url: (photoModel.listOfPhotoModels[item].urls?.regular?.encodedUrl())!) { image in
