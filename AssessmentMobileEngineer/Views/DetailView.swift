@@ -35,38 +35,47 @@ struct DetailView: View {
         .navigationBarBackButtonHidden(true) // hides the "back" or previous view title button
         .toolbar {
             ToolbarItem(placement: .navigationBarLeading) {
-                Button {
-                    DispatchQueue.main.async {
-                        resetAllViewProperties()
-                    }
-                    
-                } label: {
-                    HStack {
-                        Image(systemName: "chevron.backward")
-                        
-                        Text("Back")
-                    }
-                }
+                BackButtonView()
             }
             
-            
             ToolbarItem(placement: .navigationBarTrailing) {
-                Button {
-                    DispatchQueue.main.async {
-                        savePhoto()
-                    }
-                    
-                } label: {
-                    HStack {
-                        Image(systemName: "checkmark")
-                            .foregroundColor(.blue)
-                        
-                        Text("Save")
-                    }
-                }
+                SaveIconView()
             }
         }
         
+    }
+    
+    @ViewBuilder
+    func BackButtonView() -> some View {
+        Button {
+            DispatchQueue.main.async {
+                resetAllViewProperties()
+            }
+            
+        } label: {
+            HStack {
+                Image(systemName: "chevron.backward")
+                
+                Text("Back")
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func SaveIconView() -> some View {
+        Button {
+            DispatchQueue.main.async {
+                savePhoto()
+            }
+            
+        } label: {
+            HStack {
+                Image(systemName: "checkmark")
+                    .foregroundColor(.blue)
+                
+                Text("Save")
+            }
+        }
     }
     
     func resetAllViewProperties() {
