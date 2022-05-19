@@ -13,58 +13,84 @@ struct DetailView: View {
     var url: URL
     @State private var image: Image?
     @State private var isToastShown: Bool = false
-    @State private var lastScaleValue: CGFloat = 1.0
-    @State private var scale: CGFloat = 1
+    @State private var zoomed:Bool = false
+    @State var scale: CGFloat = 1.0
+    @State var isTapped: Bool = false
+    @State var pointTaped: CGPoint = CGPoint.zero
+    @State var draggedSize: CGSize = CGSize.zero
+    @State var previousDraged: CGSize = CGSize.zero
     
     var body: some View {
         
-        ZStack {
-            RoundedRectangle(cornerRadius: 2)
-                .foregroundColor(.black)
-            
-            VStack {
-                ScrollView([.vertical, .horizontal], showsIndicators: false) {
-                    AsyncImage(url: self.url) { image in
-                        image.resizable()
-                            .onAppear {
-                                self.image = image
-                            }
-                            .scaleEffect(scale)
-                            .gesture(MagnificationGesture().onChanged { val in
-                                let delta = val / self.lastScaleValue
-                                self.lastScaleValue = val
-                                var newScale = self.scale * delta
-                                if newScale < 1.0
-                                {
-                                    newScale = 1.0
+        GeometryReader { geo in
+            ZStack {
+                RoundedRectangle(cornerRadius: 2)
+                    .foregroundColor(.black)
+                
+                VStack {
+                    ScrollView([.vertical, .horizontal], showsIndicators: false) {
+                        AsyncImage(url: self.url) { image in
+                            image.resizable()
+                                .onAppear {
+                                    self.image = image
                                 }
-                                scale = newScale
-                            }.onEnded{val in
-                                lastScaleValue = 1
-                            })
-                    } placeholder: {
-                        ProgressView()
+                                .scaleEffect(scale)
+                                .gesture(TapGesture(count: 2)
+                                    .onEnded({ value in
+                                        self.isTapped = !self.isTapped
+                                    })
+                                    .simultaneously(with: DragGesture(minimumDistance: 0, coordinateSpace: .global)  .onChanged { (value) in
+                                        self.pointTaped = value.startLocation
+                                        self.draggedSize = CGSize(width: value.translation.width + self.previousDraged.width, height: value.translation.height + self.previousDraged.height)
+                                    }
+                                    .onEnded({ (value) in
+                                        let offSetWidth = (geo.frame(in :.global).maxX * self.scale) - (geo.frame(in :.global).maxX) / 2
+                                        let newDraggedWidth = self.previousDraged.width * self.scale
+                                        if (newDraggedWidth > offSetWidth){
+                                            self.draggedSize = CGSize(width: offSetWidth / self.scale, height: value.translation.height + self.previousDraged.height)
+                                        }
+                                        else if (newDraggedWidth < CGFloat(-offSetWidth)){
+                                            self.draggedSize = CGSize(width:  CGFloat(-offSetWidth) / self.scale, height: value.translation.height + self.previousDraged.height)
+                                        }
+                                        else{
+                                            self.draggedSize = CGSize(width: value.translation.width + self.previousDraged.width, height: value.translation.height + self.previousDraged.height)
+                                        }
+                                        self.previousDraged =  self.draggedSize
+                                    })))
+
+                                .gesture(MagnificationGesture()
+                                    .onChanged { (value) in
+                                        self.scale = value.magnitude
+
+                                }.onEnded { (val) in
+                                    //self.scale = 1.0
+                                    self.scale = val.magnitude
+                                    }
+                            )
+                        } placeholder: {
+                            ProgressView()
+                        }
+                        .frame(minWidth: 0, maxWidth: UIScreen.main.bounds.width - 10, minHeight: 0, maxHeight: 350)
+                        .cornerRadius(5)
                     }
-                    .frame(minWidth: 0, maxWidth: UIScreen.main.bounds.width, minHeight: 0, maxHeight: 350)
-                .cornerRadius(5)
+                    
+                    ToastView()
+                }
+                .padding(.vertical, 10)
+                .padding(.horizontal, 5)
+                    
+            }
+            .navigationBarTitleDisplayMode(.inline)
+            .navigationBarBackButtonHidden(true) // hides the "back" or previous view title button
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    BackButtonView()
                 }
                 
-                ToastView()
-            }
-            .padding(.vertical, 10)
-            .padding(.horizontal, 0)
-                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    SaveIconView()
+                }
         }
-        .navigationBarTitleDisplayMode(.inline)
-        .navigationBarBackButtonHidden(true) // hides the "back" or previous view title button
-        .toolbar {
-            ToolbarItem(placement: .navigationBarLeading) {
-                BackButtonView()
-            }
-            
-            ToolbarItem(placement: .navigationBarTrailing) {
-                SaveIconView()
-            }
         }
         
     }
