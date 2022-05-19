@@ -13,6 +13,8 @@ struct DetailView: View {
     var url: URL
     @State private var image: Image?
     @State private var isToastShown: Bool = false
+    @State private var lastScaleValue: CGFloat = 1.0
+    @State private var scale: CGFloat = 1
     
     var body: some View {
         
@@ -21,16 +23,31 @@ struct DetailView: View {
                 .foregroundColor(.black)
             
             VStack {
-                AsyncImage(url: self.url) { image in
-                    image.resizable()
-                        .onAppear {
-                            self.image = image
-                        }
-                } placeholder: {
-                    ProgressView()
-                }
-                .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 250)
+                ScrollView([.vertical, .horizontal], showsIndicators: false) {
+                    AsyncImage(url: self.url) { image in
+                        image.resizable()
+                            .onAppear {
+                                self.image = image
+                            }
+                            .scaleEffect(scale)
+                            .gesture(MagnificationGesture().onChanged { val in
+                                let delta = val / self.lastScaleValue
+                                self.lastScaleValue = val
+                                var newScale = self.scale * delta
+                                if newScale < 1.0
+                                {
+                                    newScale = 1.0
+                                }
+                                scale = newScale
+                            }.onEnded{val in
+                                lastScaleValue = 1
+                            })
+                    } placeholder: {
+                        ProgressView()
+                    }
+                    .frame(minWidth: 0, maxWidth: UIScreen.main.bounds.width - 10, minHeight: 0, maxHeight: 250)
                 .cornerRadius(5)
+                }
                 
                 ToastView()
             }
