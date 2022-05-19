@@ -19,6 +19,6 @@
 5. Install the pods (`pod install`)
 
 
-*`pod install` for install or delete any pod (sdks and libraries)
-
-*`pod update` to update the versions of the included pods.
+Note:
+1. `pod install` for install or delete any pod (sdks and libraries)
+2. `pod update` to update the versions of the included pods.
