@@ -37,8 +37,12 @@ struct DetailView: View {
                 BackButtonView()
             }
             
-            ToolbarItem(placement: .navigationBarTrailing) {
+            ToolbarItem(placement: .principal) {
                 SaveIconView()
+            }
+            
+            ToolbarItem(placement: .navigationBarTrailing) {
+                ShareIconView()
             }
         }
         
@@ -56,7 +60,7 @@ struct DetailView: View {
             HStack {
                 Image(systemName: "chevron.backward")
                 
-                Text("Back")
+//                Text("Back")
             }
         }
     }
@@ -65,7 +69,7 @@ struct DetailView: View {
     func SaveIconView() -> some View {
         Button {
             DispatchQueue.main.async {
-                savePhoto()
+                saveImage()
             }
             
         } label: {
@@ -73,7 +77,24 @@ struct DetailView: View {
                 Image(systemName: "checkmark")
                     .foregroundColor(.blue)
                 
-                Text("Save")
+//                Text("Save")
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func ShareIconView() -> some View {
+        Button {
+            DispatchQueue.main.async {
+                showShareSheet(with: [uiImage])
+            }
+            
+        } label: {
+            HStack {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundColor(.blue)
+                
+//                Text("Share")
             }
         }
     }
@@ -89,6 +110,15 @@ struct DetailView: View {
 
     }
     
+    func resetAllViewProperties() {
+        presentationMode.wrappedValue.dismiss()
+    }
+    
+    func saveImage() {
+        UIImageWriteToSavedPhotosAlbum(self.uiImage, nil, nil, nil)
+        showToastView()
+    }
+    
     func showToastView() {
         withAnimation(.easeIn(duration: 1)) {
             isToastShown = true
@@ -98,15 +128,6 @@ struct DetailView: View {
                 isToastShown = false
             }
         }
-    }
-    
-    func resetAllViewProperties() {
-        presentationMode.wrappedValue.dismiss()
-    }
-    
-    func savePhoto() {
-        UIImageWriteToSavedPhotosAlbum(self.uiImage, nil, nil, nil)
-        showToastView()
     }
 }
 
