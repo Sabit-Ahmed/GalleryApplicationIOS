@@ -37,13 +37,13 @@ struct DetailView: View {
                 BackButtonView()
             }
             
+            ToolbarItem(placement: .principal) {
+                SaveIconView()
+            }
+            
             ToolbarItem(placement: .navigationBarTrailing) {
                 ShareIconView()
             }
-            
-//            ToolbarItem(placement: .navigationBarTrailing) {
-//                SaveIconView()
-//            }
         }
         
         
@@ -77,7 +77,7 @@ struct DetailView: View {
                 Image(systemName: "checkmark")
                     .foregroundColor(.blue)
                 
-                Text("Save")
+//                Text("Save")
             }
         }
     }
@@ -117,10 +117,6 @@ struct DetailView: View {
     func saveImage() {
         UIImageWriteToSavedPhotosAlbum(self.uiImage, nil, nil, nil)
         showToastView()
-    }
-    
-    func shareImage() {
-        //
     }
     
     func showToastView() {
