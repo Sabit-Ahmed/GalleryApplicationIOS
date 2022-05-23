@@ -25,34 +25,30 @@ struct ContentView: View {
                     ZStack {
                         LazyVGrid(columns: gridItemLayout) {
                             
-                            ForEach(0..<photoModel.listOfPhotoModels.count, id: \.self) { item in
+                            ForEach(0..<photoModel.listOfImages.count, id: \.self) { item in
                                 NavigationLink (
-                                destination: DetailView(uiImage: $image),
+                                destination: DetailView(uiImage: photoModel.listOfImages[item]),
                                 isActive: $isImageTapped,
                                 label: {
-                                    AsyncImage(url: (photoModel.listOfPhotoModels[item].urls?.regular?.encodedUrl())!) { image in
-                                        image.resizable()
-                                            .onTapGesture {
-                                                DispatchQueue.main.async {
-                                                    isImageTapped = true
-                                                    self.image = image.snapshot()
-                                                }
-                                            }
-                                    } placeholder: {
-                                        ProgressView()
+                                    Image(uiImage: photoModel.listOfImages[item])
+                                    .resizable()
+                                    .onTapGesture {
+                                        DispatchQueue.main.async {
+                                            isImageTapped = true
+                                        }
                                     }
                                     .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 150)
                                     .cornerRadius(5)
                                         .onAppear {
                                             DispatchQueue.main.async {
-                                                if item == photoModel.listOfPhotoModels.count - 1 {
+                                                if item == photoModel.listOfImages.count - 1 {
                                                     isLastItem = true
                                                 }
                                             }
                                         }
                                         .onDisappear {
                                             DispatchQueue.main.async {
-                                                if item == photoModel.listOfPhotoModels.count - 1 {
+                                                if item == photoModel.listOfImages.count - 1 {
                                                     isLastItem = false
                                                 }
                                             }
@@ -70,7 +66,7 @@ struct ContentView: View {
                         let isScrollDown = 0 < $0.translation.height
                         print(isScrollDown)
                         if !isScrollDown && isLastItem {
-                            photoModel.getPhotos(linkType: "default")
+                            photoModel.getApiResponse(linkType: "default")
                         }
                     })
                 )
@@ -85,7 +81,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            photoModel.getPhotos(linkType: "default")
+            photoModel.getApiResponse(linkType: "default")
         }
     }
 }

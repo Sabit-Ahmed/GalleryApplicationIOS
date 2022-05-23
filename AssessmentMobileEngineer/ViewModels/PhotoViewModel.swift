@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Combine
 
 class PhotoViewModel: ObservableObject {
     
@@ -14,7 +15,15 @@ class PhotoViewModel: ObservableObject {
     @Published var listOfPhotoModels = [PhotoModel]()
     @Published var showPhotoList: Bool = false
     
-    func getPhotos(linkType: String) {
+    var didChange = PassthroughSubject<[UIImage], Never>()
+    var listOfImages = [UIImage()] {
+        didSet {
+            didChange.send(listOfImages)
+        }
+    }
+
+    
+    func getApiResponse(linkType: String) {
         
         self.service = Service()
         self.service?.getPhotosFromRemote(linkType: linkType, completion: { listOfPhotos, error in
@@ -30,6 +39,10 @@ class PhotoViewModel: ObservableObject {
                 
                 for item in listOfPhotos! {
                     self.listOfPhotoModels.append(item)
+                    guard let imageUrl = item.urls?.regular else {
+                        return
+                    }
+                    self.loadImages(urlString: imageUrl)
                 }
                 
                 DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500)) {
@@ -41,5 +54,16 @@ class PhotoViewModel: ObservableObject {
             }
         })
         
+    }
+    
+    func loadImages(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+            DispatchQueue.main.async {
+                self.listOfImages.append(UIImage(data: data) ?? UIImage())
+            }
+        }
+        task.resume()
     }
 }

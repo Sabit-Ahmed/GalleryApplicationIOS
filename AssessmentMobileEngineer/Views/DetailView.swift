@@ -10,7 +10,7 @@ import SwiftUI
 struct DetailView: View {
     
     @Environment(\.presentationMode) var presentationMode
-    @Binding var uiImage: UIImage
+    var uiImage: UIImage
     @State private var isToastShown: Bool = false
     
     var body: some View {
@@ -110,9 +110,9 @@ struct DetailView: View {
     }
 }
 
-struct AlternativeDetailView_Previews: PreviewProvider {
+struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(uiImage: .constant(UIImage(systemName: "checkmark")!))
+        DetailView(uiImage: UIImage(systemName: "checkmark")!)
             .environmentObject(PhotoViewModel())
     }
 }
