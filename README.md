@@ -52,3 +52,8 @@ Note:
 
 * https://stackoverflow.com/questions/60677622/how-to-display-image-from-a-url-in-swiftui (without AsyncImage)
 * https://stackoverflow.com/questions/60677622/how-to-display-image-from-a-url-in-swiftui (with AsyncImage)
+
+7. Share files with SwuiftUI:
+
+* https://stackoverflow.com/questions/35931946/basic-example-for-sharing-text-or-image-with-uiactivityviewcontroller-in-swift
+* https://stackoverflow.com/questions/56819360/swiftui-exporting-or-sharing-files
