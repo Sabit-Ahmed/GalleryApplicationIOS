@@ -46,11 +46,6 @@ struct ContentView: View {
                                                 }
                                             }
                                         }
-//                                        .onTapGesture {
-//                                            DispatchQueue.main.async {
-//                                                isImageTapped = true
-//                                            }
-//                                        }
                                     
                                 })
 
