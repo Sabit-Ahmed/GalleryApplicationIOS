@@ -35,7 +35,16 @@ Note:
 * https://swdevnotes.com/swift/2022/saving-a-swiftui-view-to-photos/
 * https://www.hackingwithswift.com/quick-start/swiftui/how-to-convert-a-swiftui-view-to-an-image
 
-3. Use swift Codable protocol:
+3. Pinch to zoom implementation with UIViewRepresentable:
+
+* https://stackoverflow.com/questions/58341820/isnt-there-an-easy-way-to-pinch-to-zoom-in-an-image-in-swiftui (antineoSE's answer)
+
+4. Use swift Codable protocol:
 
 * https://www.codingem.com/json-parsing-with-codable-in-swift/
 * https://stackoverflow.com/questions/51192270/swift-codable-with-reserved-word
+
+5. Cache/download image:
+
+* https://stackoverflow.com/questions/60677622/how-to-display-image-from-a-url-in-swiftui (without AsyncImage)
+* https://stackoverflow.com/questions/60677622/how-to-display-image-from-a-url-in-swiftui (with AsyncImage)
