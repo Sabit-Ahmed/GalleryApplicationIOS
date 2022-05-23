@@ -30,21 +30,25 @@ Note:
 
 * https://www.appcoda.com/learnswiftui/swiftui-gridlayout.html
 
-2. Saving a SwiftUI view to Photo Library: 
+2. Detect scroll direction (used to implement infinite scroll):
+
+* https://stackoverflow.com/questions/59342384/how-to-detect-scroll-direction-programmatically-in-swiftui-scrollview (Den's answer, Marc T.'s answer is also helpfull)
+
+3. Saving a SwiftUI view to Photo Library: 
 
 * https://swdevnotes.com/swift/2022/saving-a-swiftui-view-to-photos/
 * https://www.hackingwithswift.com/quick-start/swiftui/how-to-convert-a-swiftui-view-to-an-image
 
-3. Pinch to zoom implementation with UIViewRepresentable:
+4. Pinch to zoom implementation with UIViewRepresentable:
 
 * https://stackoverflow.com/questions/58341820/isnt-there-an-easy-way-to-pinch-to-zoom-in-an-image-in-swiftui (antineoSE's answer)
 
-4. Use swift Codable protocol:
+5. Use swift Codable protocol:
 
 * https://www.codingem.com/json-parsing-with-codable-in-swift/
 * https://stackoverflow.com/questions/51192270/swift-codable-with-reserved-word
 
-5. Cache/download image:
+6. Cache/download image:
 
 * https://stackoverflow.com/questions/60677622/how-to-display-image-from-a-url-in-swiftui (without AsyncImage)
 * https://stackoverflow.com/questions/60677622/how-to-display-image-from-a-url-in-swiftui (with AsyncImage)
