@@ -38,8 +38,12 @@ struct DetailView: View {
             }
             
             ToolbarItem(placement: .navigationBarTrailing) {
-                SaveIconView()
+                ShareIconView()
             }
+            
+//            ToolbarItem(placement: .navigationBarTrailing) {
+//                SaveIconView()
+//            }
         }
         
         
@@ -56,7 +60,7 @@ struct DetailView: View {
             HStack {
                 Image(systemName: "chevron.backward")
                 
-                Text("Back")
+//                Text("Back")
             }
         }
     }
@@ -65,7 +69,7 @@ struct DetailView: View {
     func SaveIconView() -> some View {
         Button {
             DispatchQueue.main.async {
-                savePhoto()
+                saveImage()
             }
             
         } label: {
@@ -74,6 +78,23 @@ struct DetailView: View {
                     .foregroundColor(.blue)
                 
                 Text("Save")
+            }
+        }
+    }
+    
+    @ViewBuilder
+    func ShareIconView() -> some View {
+        Button {
+            DispatchQueue.main.async {
+                showShareSheet(with: [uiImage])
+            }
+            
+        } label: {
+            HStack {
+                Image(systemName: "square.and.arrow.up")
+                    .foregroundColor(.blue)
+                
+//                Text("Share")
             }
         }
     }
@@ -89,6 +110,19 @@ struct DetailView: View {
 
     }
     
+    func resetAllViewProperties() {
+        presentationMode.wrappedValue.dismiss()
+    }
+    
+    func saveImage() {
+        UIImageWriteToSavedPhotosAlbum(self.uiImage, nil, nil, nil)
+        showToastView()
+    }
+    
+    func shareImage() {
+        //
+    }
+    
     func showToastView() {
         withAnimation(.easeIn(duration: 1)) {
             isToastShown = true
@@ -99,20 +133,11 @@ struct DetailView: View {
             }
         }
     }
-    
-    func resetAllViewProperties() {
-        presentationMode.wrappedValue.dismiss()
-    }
-    
-    func savePhoto() {
-        UIImageWriteToSavedPhotosAlbum(self.uiImage, nil, nil, nil)
-        showToastView()
-    }
 }
 
 struct AlternativeDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView(uiImage: .constant(UIImage(systemName: "checkmark")!))
+        DetailView(uiImage: .constant(UIImage(systemName: "square.and.arrow.up")!))
             .environmentObject(PhotoViewModel())
     }
 }
