@@ -38,9 +38,11 @@ class PhotoViewModel: ObservableObject {
                     self.loadImages(urlString: imageUrl)
                 }
                 
-                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500)) {
-                    withAnimation {
-                        self.showPhotoList = true
+                if !self.showPhotoList {
+                    DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500)) {
+                        withAnimation {
+                            self.showPhotoList = true
+                        }
                     }
                 }
                 

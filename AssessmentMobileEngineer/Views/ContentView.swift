@@ -13,7 +13,7 @@ struct ContentView: View {
     @State private var midY: Double = 0
     @State private var isLastItem: Bool = false
     @State private var isImageTapped: Bool = false
-    @State private var image: UIImage = UIImage()
+    @State var isImageLoaded: Bool = false
     var gridItemLayout: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -30,15 +30,11 @@ struct ContentView: View {
                                 destination: DetailView(uiImage: photoModel.listOfImages[item]),
                                 isActive: $isImageTapped,
                                 label: {
+                                    
                                     Image(uiImage: photoModel.listOfImages[item])
-                                    .resizable()
-                                    .onTapGesture {
-                                        DispatchQueue.main.async {
-                                            isImageTapped = true
-                                        }
-                                    }
-                                    .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 150)
-                                    .cornerRadius(5)
+                                        .resizable()
+                                        .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 150)
+                                        .cornerRadius(5)
                                         .onAppear {
                                             DispatchQueue.main.async {
                                                 if item == photoModel.listOfImages.count - 1 {
@@ -53,6 +49,12 @@ struct ContentView: View {
                                                 }
                                             }
                                         }
+                                        .onTapGesture {
+                                            DispatchQueue.main.async {
+                                                isImageTapped = true
+                                            }
+                                        }
+                                    
                                 })
 
                             }
