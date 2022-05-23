@@ -28,7 +28,6 @@ struct ContentView: View {
                             ForEach(0..<photoModel.listOfImages.count, id: \.self) { item in
                                 NavigationLink (
                                 destination: DetailView(uiImage: photoModel.listOfImages[item]),
-                                isActive: $isImageTapped,
                                 label: {
                                     
                                     Image(uiImage: photoModel.listOfImages[item])
@@ -49,11 +48,11 @@ struct ContentView: View {
                                                 }
                                             }
                                         }
-                                        .onTapGesture {
-                                            DispatchQueue.main.async {
-                                                isImageTapped = true
-                                            }
-                                        }
+//                                        .onTapGesture {
+//                                            DispatchQueue.main.async {
+//                                                isImageTapped = true
+//                                            }
+//                                        }
                                     
                                 })
 
