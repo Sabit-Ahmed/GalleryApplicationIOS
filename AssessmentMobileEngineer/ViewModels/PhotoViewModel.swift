@@ -13,7 +13,7 @@ class PhotoViewModel: ObservableObject {
     @Published var service: Service?
     @Published var listOfPhotoModels = [PhotoModel]()
     @Published var showPhotoList: Bool = false
-    @Published var listOfImages = [UIImage()]
+    @Published var listOfImages = [UIImage]()
 
     
     func getApiResponse(linkType: String) {
