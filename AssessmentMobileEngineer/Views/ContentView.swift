@@ -12,9 +12,7 @@ struct ContentView: View {
     @EnvironmentObject var photoModel: PhotoViewModel
     @State private var midY: Double = 0
     @State private var isLastItem: Bool = false
-    @State private var isImageTapped: Bool = false
-    @State var isImageLoaded: Bool = false
-    var gridItemLayout: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
+    private var gridItemLayout: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
         
