@@ -7,20 +7,13 @@
 
 import Foundation
 import SwiftUI
-import Combine
 
 class PhotoViewModel: ObservableObject {
     
     @Published var service: Service?
     @Published var listOfPhotoModels = [PhotoModel]()
     @Published var showPhotoList: Bool = false
-    
-    var didChange = PassthroughSubject<[UIImage], Never>()
-    var listOfImages = [UIImage()] {
-        didSet {
-            didChange.send(listOfImages)
-        }
-    }
+    @Published var listOfImages = [UIImage()]
 
     
     func getApiResponse(linkType: String) {
