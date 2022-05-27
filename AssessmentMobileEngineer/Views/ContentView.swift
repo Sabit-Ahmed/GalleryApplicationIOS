@@ -83,6 +83,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(PhotoViewModel())
+            .environmentObject(PhotoViewModel(appConfig: AppConfig(appName: "AssessmentMobileEngineer", appFlavor: "dev")))
     }
 }

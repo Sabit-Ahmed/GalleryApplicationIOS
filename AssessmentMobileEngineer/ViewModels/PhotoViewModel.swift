@@ -9,16 +9,19 @@ import Foundation
 import SwiftUI
 
 class PhotoViewModel: ObservableObject {
-    
+    @Published var appConfig: AppConfig
     @Published var service: Service?
     @Published var listOfPhotoModels = [PhotoModel]()
     @Published var showPhotoList: Bool = false
     @Published var listOfImages = [UIImage]()
-
+    
+    init(appConfig: AppConfig) {
+        self.appConfig = appConfig
+        self.service = Service(appConfig: self.appConfig)
+    }
     
     func getApiResponse(linkType: String) {
         
-        self.service = Service()
         self.service?.getPhotosFromRemote(linkType: linkType, completion: { listOfPhotos, error in
             print("inside")
             if error != nil {

@@ -9,10 +9,13 @@ import SwiftUI
 
 @main
 struct AssessmentMobileEngineerApp: App {
+    
+    let appConfig: AppConfig = AppConfig(appName: "AssessmentMobileEngineer", appFlavor: "dev")
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(PhotoViewModel())
+                .environmentObject(PhotoViewModel(appConfig: self.appConfig))
         }
     }
 }

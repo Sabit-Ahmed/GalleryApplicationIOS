@@ -134,6 +134,6 @@ struct DetailView: View {
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
         DetailView(uiImage: UIImage(systemName: "checkmark")!)
-            .environmentObject(PhotoViewModel())
+            .environmentObject(PhotoViewModel(appConfig: AppConfig(appName: "AssessmentMobileEngineer", appFlavor: "dev")))
     }
 }
