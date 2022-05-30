@@ -27,7 +27,7 @@ class Service {
         }
     }
     
-    func getPhotosFromRemote(linkType: String, completion: @escaping (([PhotoModel]?, Error?) -> Void)) {
+    func getPhotosFromRemote(linkType: String, completion: @escaping (([ResponseModel]?, Error?) -> Void)) {
         
         let requestUrlString = getLink(linkType: linkType)
 
@@ -92,7 +92,7 @@ class Service {
                     let jsonDecoder = JSONDecoder()
 
                     // Decode json
-                    let modules = try jsonDecoder.decode([PhotoModel].self, from: data!)
+                    let modules = try jsonDecoder.decode([ResponseModel].self, from: data!)
                     
                     DispatchQueue.main.async {
                         completion(modules, nil) // when you have user
@@ -119,7 +119,7 @@ class Service {
         }
     }
     
-    func getPhotosFromLocal() -> [PhotoModel]? {
+    func getPhotosFromLocal() -> [ResponseModel]? {
         
         let YOUR_ACCESS_KEY = "gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8"
         let requestUrlString = "https://api.unsplash.com/photos/?client_id=" + YOUR_ACCESS_KEY
@@ -145,7 +145,7 @@ class Service {
                 let jsonDecoder = JSONDecoder()
                 
                 // Decode json
-                let modules = try jsonDecoder.decode([PhotoModel].self, from: data)
+                let modules = try jsonDecoder.decode([ResponseModel].self, from: data)
                 return modules
             }
             catch {

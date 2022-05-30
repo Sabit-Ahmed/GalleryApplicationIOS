@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct PhotoModel: Identifiable, Decodable {
+struct ResponseModel: Identifiable, Decodable {
     let id: String?
     let created_at: String?
     let updated_at: String?
