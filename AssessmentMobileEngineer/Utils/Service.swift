@@ -9,27 +9,34 @@ import Foundation
 
 class Service {
     
-    var url: URL?
-    var request: NSMutableURLRequest?
-    var sessionConfiguration: URLSessionConfiguration?
-    var session: URLSession?
-    var dataTask: URLSessionDataTask?
+    private var url: URL?
+    private var request: NSMutableURLRequest?
+    private var sessionConfiguration: URLSessionConfiguration?
+    private var session: URLSession?
+    private var dataTask: URLSessionDataTask?
+    private let appConfig: AppConfig
+    
+    init(appConfig: AppConfig) {
+        self.appConfig = appConfig
+    }
     
     func getLink(linkType: String) -> String {
         
         let ACCESS_KEY = "gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8"
         
         switch linkType.lowercased() {
-        case "next": return "https://api.unsplash.com/photos/?client_id=\(ACCESS_KEY)&per_page=12&page=2"
-        case "last": return "https://api.unsplash.com/photos/?client_id=\(ACCESS_KEY)&per_page=12&page=26318"
-        case "more": return "https://api.unsplash.com/photos/random/?client_id=\(ACCESS_KEY)&count=3"
-        default: return "https://api.unsplash.com/photos/random/?client_id=\(ACCESS_KEY)&count=15"
+        case "next": return "/photos/?client_id=\(ACCESS_KEY)&per_page=12&page=2"
+        case "last": return "/photos/?client_id=\(ACCESS_KEY)&per_page=12&page=26318"
+        case "more": return "/photos/random/?client_id=\(ACCESS_KEY)&count=3"
+        default: return "/photos/random/?client_id=\(ACCESS_KEY)&count=15"
         }
     }
     
     func getResponseFromRemote(linkType: String, completion: @escaping (([ResponseModel]?, Error?) -> Void)) {
         
-        let requestUrlString = getLink(linkType: linkType)
+        let baseApiUrl = CommonUtils.getBaseUrl(appFlavor: self.appConfig.getAppFlavor())
+        let urlTypeWithExtension = getLink(linkType: linkType)
+        let requestUrlString = baseApiUrl.getResponse + urlTypeWithExtension
 
         // Create url object
         self.url = URL(string: requestUrlString)

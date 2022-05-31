@@ -51,20 +51,6 @@ extension String {
 
 }
 
-extension Color {
-    static let lightShadow = Color(red: 255 / 255, green: 255 / 255, blue: 255 / 255)
-    static let darkShadow = Color(red: 163 / 255, green: 177 / 255, blue: 198 / 255)
-    static let background = Color(red: 224 / 255, green: 229 / 255, blue: 236 / 255)
-    static let neumorphictextColor = Color(red: 132 / 255, green: 132 / 255, blue: 132 / 255)
-}
-
-extension AnyTransition {
-    static var backslide: AnyTransition {
-        AnyTransition.asymmetric(
-            insertion: .move(edge: .leading),
-            removal: .move(edge: .leading))}
-}
-
 extension UIDevice {
 
    class var isPhone: Bool {
@@ -92,4 +78,25 @@ extension View {
             view?.drawHierarchy(in: controller.view.bounds, afterScreenUpdates: true)
         }
     }
+    
+    /// Show the classic Apple share sheet on iPhone and iPad.
+      ///
+      func showShareSheet(with activityItems: [Any]) {
+        guard let source = UIApplication.shared.windows.last?.rootViewController else {
+          return
+        }
+
+        let activityVC = UIActivityViewController(
+          activityItems: activityItems,
+          applicationActivities: nil)
+
+        if let popoverController = activityVC.popoverPresentationController {
+          popoverController.sourceView = source.view
+          popoverController.sourceRect = CGRect(x: source.view.bounds.midX,
+                                                y: source.view.bounds.midY,
+                                                width: .zero, height: .zero)
+          popoverController.permittedArrowDirections = []
+        }
+        source.present(activityVC, animated: true)
+      }
 }

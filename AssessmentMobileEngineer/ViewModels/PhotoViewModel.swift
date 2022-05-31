@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 class PhotoViewModel: ObservableObject {
-    
+    @Published var appConfig: AppConfig
     @Published var service: Service?
     @Published var responseUrlString: String?
     @Published var responses = [ResponseModel]()
@@ -17,6 +17,11 @@ class PhotoViewModel: ObservableObject {
     @Published var listOfImages = [UIImage]()
     @Published var imageCache = ImageCacheManager.getImageCache()
 
+    
+    init(appConfig: AppConfig) {
+        self.appConfig = appConfig
+        self.service = Service(appConfig: self.appConfig)
+    }
     
     func loadResponses(linkType: String = "default") {
         if loadResponseFromCache() {
@@ -39,7 +44,6 @@ class PhotoViewModel: ObservableObject {
     
     func getResponseFromRemote(linkType: String) {
         
-        self.service = Service()
         self.service?.getResponseFromRemote(linkType: linkType, completion: { responses, error in
             print("inside")
             if error != nil {
