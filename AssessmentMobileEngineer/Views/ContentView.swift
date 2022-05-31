@@ -12,6 +12,7 @@ struct ContentView: View {
     @EnvironmentObject var service: ViewModel
     @State private var midY: Double = 0
     @State private var isLastItem: Bool = false
+    @State private var isScrollUp: Bool = false
     private var gridItemLayout: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
     
     var body: some View {
@@ -34,15 +35,28 @@ struct ContentView: View {
                                         .cornerRadius(5)
                                         .onAppear {
                                             DispatchQueue.main.async {
-                                                if item == service.listOfImages.count - 1 {
-                                                    isLastItem = true
+                                                if (item == service.listOfImages.count - 1
+                                                )
+                                                {
+                                                    print("isLastItem:: \(isLastItem),  isScrollUp:: \(isScrollUp)")
+                                                    
+                                                    if !isLastItem {
+                                                        isLastItem = true
+                                                    }
+                                                    
+                                                    if self.isScrollUp && isLastItem {
+                                                        service.getResponseFromRemote(linkType: "default")
+                                                        isLastItem = false
+                                                    }
                                                 }
                                             }
                                         }
                                         .onDisappear {
                                             DispatchQueue.main.async {
-                                                if item == service.listOfImages.count - 1 {
+                                                if (item == service.listOfImages.count - 1
+                                                ) {
                                                     isLastItem = false
+                                                    print("isLastItem:: \(isLastItem),  isScrollUp:: \(isScrollUp)")
                                                 }
                                             }
                                         }
@@ -57,11 +71,8 @@ struct ContentView: View {
                 }
                 .simultaneousGesture(
                     DragGesture().onChanged({
-                        let isScrollDown = 0 < $0.translation.height
-                        print(isScrollDown)
-                        if !isScrollDown && isLastItem {
-                            service.getResponseFromRemote(linkType: "default")
-                        }
+                        self.isScrollUp = 0 > $0.translation.height
+//                        print(self.isScrollUp)
                     })
                 )
                 .padding(5)
