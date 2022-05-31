@@ -10,7 +10,7 @@ import Foundation
 class Service {
     
     var url: URL?
-    var request: URLRequest?
+    var request: NSMutableURLRequest?
     var sessionConfiguration: URLSessionConfiguration?
     var session: URLSession?
     var dataTask: URLSessionDataTask?
@@ -27,7 +27,7 @@ class Service {
         }
     }
     
-    func getPhotosFromRemote(linkType: String, completion: @escaping (([ResponseModel]?, Error?) -> Void)) {
+    func getResponseFromRemote(linkType: String, completion: @escaping (([ResponseModel]?, Error?) -> Void)) {
         
         let requestUrlString = getLink(linkType: linkType)
 
@@ -41,10 +41,11 @@ class Service {
 
         do {
             // Create url request object
-            self.request = URLRequest(url: self.url!)
+            self.request = NSMutableURLRequest(url: self.url!)
 
             // Request method
             self.request?.httpMethod = "GET"
+            self.request?.cachePolicy = URLRequest.CachePolicy.reloadIgnoringCacheData
 
             // Set HTTP Request Headers
             self.request?.setValue("application/json", forHTTPHeaderField: "Accept")
@@ -66,7 +67,7 @@ class Service {
                 return
             }
 
-            self.dataTask = self.session?.dataTask(with: self.request!) { data, response, error in
+            self.dataTask = self.session?.dataTask(with: self.request! as URLRequest) { data, response, error in
 
 
 //                if let httpResponse = response as? HTTPURLResponse {
@@ -94,6 +95,8 @@ class Service {
                     // Decode json
                     let modules = try jsonDecoder.decode([ResponseModel].self, from: data!)
                     
+                    
+                    
                     DispatchQueue.main.async {
                         completion(modules, nil) // when you have user
                     }
@@ -119,13 +122,27 @@ class Service {
         }
     }
     
+    func saveResponseDataToDisk(responseData: Data) {
+        do {
+            let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+            let fileURL = documentsURL.appendingPathComponent("CachedResponse.json")
+            try responseData.write(to: fileURL, options: .atomic)
+        } catch { }
+    }
+    
+    func readResponseDataFromDisk() -> Data? {
+        let documentsURL = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
+        let filePath = documentsURL.appendingPathComponent("CachedResponse.json").path
+        if FileManager.default.fileExists(atPath: filePath), let data = FileManager.default.contents(atPath: filePath) {
+            return data
+        }
+        return nil
+    }
+    
     func getPhotosFromLocal() -> [ResponseModel]? {
         
-        let YOUR_ACCESS_KEY = "gIWX8EWv2qZrSl6Z7wowyy-G0V-S7haMAXre7XWpLz8"
-        let requestUrlString = "https://api.unsplash.com/photos/?client_id=" + YOUR_ACCESS_KEY
-        
         // Get a url path to the json file
-        let pathString = Bundle.main.path(forResource: requestUrlString, ofType: "json")
+        let pathString = Bundle.main.path(forResource: "CachedResponse", ofType: "json")
 
         // Check if the pathString is a nil object. Otherwise,
         guard pathString != nil else {

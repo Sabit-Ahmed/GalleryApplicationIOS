@@ -60,7 +60,7 @@ struct ContentView: View {
                         let isScrollDown = 0 < $0.translation.height
                         print(isScrollDown)
                         if !isScrollDown && isLastItem {
-                            photoModel.getApiResponse(linkType: "default")
+                            photoModel.getResponseFromRemote(linkType: "default")
                         }
                     })
                 )
@@ -75,7 +75,7 @@ struct ContentView: View {
             }
         }
         .onAppear {
-            photoModel.getApiResponse(linkType: "default")
+            photoModel.getResponseFromRemote(linkType: "default")
         }
     }
 }

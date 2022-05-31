@@ -11,16 +11,36 @@ import SwiftUI
 class PhotoViewModel: ObservableObject {
     
     @Published var service: Service?
+    @Published var responseUrlString: String?
     @Published var responses = [ResponseModel]()
     @Published var showPhotoList: Bool = false
     @Published var listOfImages = [UIImage]()
     @Published var imageCache = ImageCacheManager.getImageCache()
 
     
-    func getApiResponse(linkType: String) {
+    func loadResponses(linkType: String = "default") {
+        if loadResponseFromCache() {
+            return
+        }
+        getResponseFromRemote(linkType: linkType)
+    }
+    
+    func loadResponseFromCache() -> Bool {
+       
+        guard let cacheImage = imageCache.get(forKey: self.responseUrlString!) else {
+           return false
+       }
+       
+        DispatchQueue.main.async {
+            self.listOfImages.append(cacheImage)
+        }
+       return true
+    }
+    
+    func getResponseFromRemote(linkType: String) {
         
         self.service = Service()
-        self.service?.getPhotosFromRemote(linkType: linkType, completion: { responses, error in
+        self.service?.getResponseFromRemote(linkType: linkType, completion: { responses, error in
             print("inside")
             if error != nil {
 
