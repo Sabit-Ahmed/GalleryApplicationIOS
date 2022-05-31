@@ -15,7 +15,7 @@ struct AssessmentMobileEngineerApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
-                .environmentObject(PhotoViewModel(appConfig: self.appConfig))
+                .environmentObject(ViewModel(appConfig: self.appConfig))
         }
     }
 }

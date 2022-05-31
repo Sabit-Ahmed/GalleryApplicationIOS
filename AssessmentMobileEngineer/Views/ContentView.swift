@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var photoModel: PhotoViewModel
+    @EnvironmentObject var service: ViewModel
     @State private var midY: Double = 0
     @State private var isLastItem: Bool = false
     private var gridItemLayout: [GridItem] = [GridItem(.flexible()), GridItem(.flexible()), GridItem(.flexible())]
@@ -18,30 +18,30 @@ struct ContentView: View {
         
         NavigationView {
             
-            if photoModel.showPhotoList {
+            if service.showPhotoList {
                 ScrollView(.vertical) {
                     ZStack {
                         LazyVGrid(columns: gridItemLayout) {
                             
-                            ForEach(0..<photoModel.listOfImages.count, id: \.self) { item in
+                            ForEach(0..<service.listOfImages.count, id: \.self) { item in
                                 NavigationLink (
-                                destination: DetailView(uiImage: photoModel.listOfImages[item]),
+                                destination: DetailView(uiImage: service.listOfImages[item]),
                                 label: {
                                     
-                                    Image(uiImage: photoModel.listOfImages[item])
+                                    Image(uiImage: service.listOfImages[item])
                                         .resizable()
                                         .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: 150)
                                         .cornerRadius(5)
                                         .onAppear {
                                             DispatchQueue.main.async {
-                                                if item == photoModel.listOfImages.count - 1 {
+                                                if item == service.listOfImages.count - 1 {
                                                     isLastItem = true
                                                 }
                                             }
                                         }
                                         .onDisappear {
                                             DispatchQueue.main.async {
-                                                if item == photoModel.listOfImages.count - 1 {
+                                                if item == service.listOfImages.count - 1 {
                                                     isLastItem = false
                                                 }
                                             }
@@ -60,7 +60,7 @@ struct ContentView: View {
                         let isScrollDown = 0 < $0.translation.height
                         print(isScrollDown)
                         if !isScrollDown && isLastItem {
-                            photoModel.getResponseFromRemote(linkType: "default")
+                            service.getResponseFromRemote(linkType: "default")
                         }
                     })
                 )
@@ -74,8 +74,14 @@ struct ContentView: View {
                     .position(x: UIScreen.main.bounds.width / 2, y: UIScreen.main.bounds.height / 3)
             }
         }
-        .onAppear {
-            photoModel.getResponseFromRemote(linkType: "default")
+        .onReceive(service.$listOfImages) { _ in
+            if !service.showPhotoList {
+                DispatchQueue.main.asyncAfter(deadline: .now() + .milliseconds(1500)) {
+                    withAnimation {
+                        service.showPhotoList = true
+                    }
+                }
+            }
         }
     }
 }
@@ -83,6 +89,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(PhotoViewModel(appConfig: AppConfig(appName: "AssessmentMobileEngineer", appFlavor: "dev")))
+            .environmentObject(ViewModel(appConfig: AppConfig(appName: "AssessmentMobileEngineer", appFlavor: "dev")))
     }
 }

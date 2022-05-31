@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ResponseModel: Identifiable, Decodable {
+struct ResponseModel: Identifiable, Codable {
     let id: String?
     let created_at: String?
     let updated_at: String?
@@ -29,7 +29,7 @@ struct ResponseModel: Identifiable, Decodable {
     let user: SponsorObject?
 }
 
-struct UrlObject: Identifiable, Decodable {
+struct UrlObject: Identifiable, Codable {
     var id : UUID?
     let raw: String?
     let full: String?
@@ -39,7 +39,7 @@ struct UrlObject: Identifiable, Decodable {
     let small_s3: String?
 }
 
-struct LinkObject: Identifiable, Decodable {
+struct LinkObject: Identifiable, Codable {
     let id: UUID?
     let `self`: String?
     let html: String?
@@ -47,7 +47,7 @@ struct LinkObject: Identifiable, Decodable {
     let download_location: String?
 }
 
-struct SponsorshipObject: Identifiable, Decodable {
+struct SponsorshipObject: Identifiable, Codable {
     let id: UUID?
     let impression_urls: [String]?
     let tagline: String?
@@ -55,7 +55,7 @@ struct SponsorshipObject: Identifiable, Decodable {
     let sponsor: SponsorObject?
 }
 
-struct SponsorObject: Identifiable, Decodable {
+struct SponsorObject: Identifiable, Codable {
     let id: String?
     let updated_at: String?
     let username: String?
@@ -77,7 +77,7 @@ struct SponsorObject: Identifiable, Decodable {
     let social: SocialObject?
 }
 
-struct SponsorLinkObject: Identifiable, Decodable {
+struct SponsorLinkObject: Identifiable, Codable {
     let id: UUID?
     let `self`: String?
     let html: String?
@@ -88,14 +88,14 @@ struct SponsorLinkObject: Identifiable, Decodable {
     let followers: String
 }
 
-struct ProfileImageObject: Identifiable, Decodable {
+struct ProfileImageObject: Identifiable, Codable {
     let id: UUID?
     let small: String?
     let medium: String?
     let large: String?
 }
 
-struct SocialObject: Identifiable, Decodable {
+struct SocialObject: Identifiable, Codable {
     let id: UUID?
     let instagram_username: String?
     let portfolio_url: String?
@@ -103,6 +103,6 @@ struct SocialObject: Identifiable, Decodable {
     let paypal_email: String?
 }
 
-struct TopicSubmissionsObject: Identifiable, Decodable {
+struct TopicSubmissionsObject: Identifiable, Codable {
     let id: UUID?
 }

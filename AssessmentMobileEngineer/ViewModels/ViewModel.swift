@@ -6,18 +6,32 @@
 //
 
 import Foundation
+import Combine
+import SwiftUI
 
-class Service {
+class ViewModel: ObservableObject {
+    
+    @Published var appConfig: AppConfig
+    @Published var showPhotoList: Bool = false
+    @Published var responseUrlString: String?
+    @Published var responses = [ResponseModel]()
+    @Published var listOfImages = [UIImage]()
+    @Published var imageCache = ImageCacheManager.getImageCache()
     
     private var url: URL?
     private var request: NSMutableURLRequest?
     private var sessionConfiguration: URLSessionConfiguration?
     private var session: URLSession?
     private var dataTask: URLSessionDataTask?
-    private let appConfig: AppConfig
     
-    init(appConfig: AppConfig) {
+    init(appConfig: AppConfig, linkType: String = "default") {
         self.appConfig = appConfig
+        if let data = self.readResponseDataFromDisk() {
+            self.decodeResponseData(responseData: data)
+        }
+        else {
+            self.getResponseFromRemote(linkType: linkType)
+        }
     }
     
     func getLink(linkType: String) -> String {
@@ -32,7 +46,7 @@ class Service {
         }
     }
     
-    func getResponseFromRemote(linkType: String, completion: @escaping (([ResponseModel]?, Error?) -> Void)) {
+    func getResponseFromRemote(linkType: String) {
         
         let baseApiUrl = CommonUtils.getBaseUrl(appFlavor: self.appConfig.getAppFlavor())
         let urlTypeWithExtension = getLink(linkType: linkType)
@@ -74,53 +88,20 @@ class Service {
                 return
             }
 
-            self.dataTask = self.session?.dataTask(with: self.request! as URLRequest) { data, response, error in
-
-
-//                if let httpResponse = response as? HTTPURLResponse {
-//                    print(httpResponse.statusCode) // TODO: Handle request timeout by using this code
-//                }
+            self.dataTask = self.session?.dataTask(with: self.request! as URLRequest) { (data, response, error) in
 
                 print("Inside dataTask of API")
                 // Check if there is any error
-                guard error == nil else {
-//                    print("ERROR: \(error!.localizedDescription)")
-                    // There is error
-                    DispatchQueue.main.async {
-                        completion(nil, error) // when you have error
+                guard let _:Data = data, let _:URLResponse = response, error == nil else {
+                    if error != nil {
+                        print("Error inside the dataTask:: \(String(describing: error))")
                     }
                     return
                 }
-
-
-
-                // Operate on the fetched data
-                do {
-                    // Create a json decoder object
-                    let jsonDecoder = JSONDecoder()
-
-                    // Decode json
-                    let modules = try jsonDecoder.decode([ResponseModel].self, from: data!)
-                    
-                    
-                    
-                    DispatchQueue.main.async {
-                        completion(modules, nil) // when you have user
-                    }
-
-
+                DispatchQueue.main.async {
+//                    self.saveResponseDataToDisk(responseData: data!)
+                    self.decodeResponseData(responseData: data!)
                 }
-                catch {
-                    // Couldn't parse the json data
-//                    print(error)
-
-                    DispatchQueue.main.async {
-                        self.session?.invalidateAndCancel()
-                        completion(nil, error) // when you have error
-                    }
-
-                }
-
             }
 
             // Kick off the task
@@ -146,40 +127,66 @@ class Service {
         return nil
     }
     
-    func getPhotosFromLocal() -> [ResponseModel]? {
-        
-        // Get a url path to the json file
-        let pathString = Bundle.main.path(forResource: "CachedResponse", ofType: "json")
-
-        // Check if the pathString is a nil object. Otherwise,
-        guard pathString != nil else {
-            return nil
-        }
-
-        // Create a url object
-        let url = URL(fileURLWithPath: pathString!)
-        
+    func decodeResponseData(responseData: Data) {
+    
+        // Operate on the fetched data
         do {
-            // Create data object
-            let data = try Data(contentsOf: url)
+            // Create a json decoder object
+            let jsonDecoder = JSONDecoder()
+
+            // Decode json
+            let module = try jsonDecoder.decode([ResponseModel].self, from: responseData)
             
-            // Operate on the fetched data
-            do {
-                // Create a json decoder object
-                let jsonDecoder = JSONDecoder()
+            guard !module.isEmpty else { return }
+            for item in module {
+                self.responses.append(item)
                 
-                // Decode json
-                let modules = try jsonDecoder.decode([ResponseModel].self, from: data)
-                return modules
+                guard let imageUrl = item.urls?.regular else {
+                    return
+                }
+                self.loadImage(urlString: imageUrl)
             }
-            catch {
-                print(error)
+            DispatchQueue.main.async {
+                self.showPhotoList = true
             }
-            
+            let jsonData = try JSONEncoder().encode(self.responses)
+            self.saveResponseDataToDisk(responseData: jsonData)
         }
         catch {
-            print("Can't encode json resquest body")
+            // Couldn't parse the json data
+            print(error)
+            self.session?.invalidateAndCancel()
         }
-        return nil
+    }
+    
+    func loadImage(urlString: String) {
+       if loadImageFromCache(urlString: urlString) {
+           return
+       }
+       getImagesFromReponse(urlString: urlString)
+    }
+    
+    func loadImageFromCache(urlString: String) -> Bool {
+       
+       guard let cacheImage = imageCache.get(forKey: urlString) else {
+           return false
+       }
+       
+        DispatchQueue.main.async {
+            self.listOfImages.append(cacheImage)
+        }
+       return true
+    }
+    
+    func getImagesFromReponse(urlString: String) {
+        guard let url = URL(string: urlString) else { return }
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data else { return }
+            DispatchQueue.main.async {
+                self.listOfImages.append(UIImage(data: data) ?? UIImage())
+                self.imageCache.set(forKey: urlString, image: UIImage(data: data) ?? UIImage())
+            }
+        }
+        task.resume()
     }
 }
