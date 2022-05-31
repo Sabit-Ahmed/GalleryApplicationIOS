@@ -48,7 +48,7 @@ Note:
 * https://www.codingem.com/json-parsing-with-codable-in-swift/
 * https://stackoverflow.com/questions/51192270/swift-codable-with-reserved-word
 
-6. Cache/download image:
+6. Download and display remote image:
 
 * https://stackoverflow.com/questions/60677622/how-to-display-image-from-a-url-in-swiftui (without AsyncImage)
 * https://stackoverflow.com/questions/60677622/how-to-display-image-from-a-url-in-swiftui (with AsyncImage)
@@ -57,3 +57,13 @@ Note:
 
 * https://stackoverflow.com/questions/35931946/basic-example-for-sharing-text-or-image-with-uiactivityviewcontroller-in-swift
 * https://stackoverflow.com/questions/56819360/swiftui-exporting-or-sharing-files
+
+8. Cache / store Response (store json objects as local file):
+* https://stackoverflow.com/questions/41672065/how-do-i-download-json-file-from-remote-saver-and-save-to-bundle-for-offline-acc 
+* https://programmingwithswift.com/how-to-save-json-to-file-with-swift/#:~:text=Save%20JSON%20string%20to%20file,that%20is%20built%20into%20String%20.
+
+9. Cache image in swiftui:
+* https://schwiftyui.com/swiftui/downloading-and-caching-images-in-swiftui/
+
+10. Third-party library for caching:
+* https://github.com/huynguyencong/DataCache
